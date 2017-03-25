@@ -17,7 +17,7 @@ public class pancake {
     public static void calculate(String a)
     {
         String sub = flipper(a);
-        //System.out.println(a);
+        System.out.println(a);
         valchange(sub);
     }
 
