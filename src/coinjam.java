@@ -5,13 +5,14 @@
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.util.*;
 public class coinjam {
     public static ArrayList<Integer> primenumber= new ArrayList<Integer>();
     private static int n=4;
     private static ArrayList<Integer> coin = new ArrayList<>();
-
     public static void main(String args[]) {
+
 
         ArrayList<Integer> number= new ArrayList<Integer>(generate(n));
         System.out.println("The total strings are"+number);
@@ -20,23 +21,30 @@ public class coinjam {
 
     }
 
-    private static void interpret(ArrayList<Integer> number) { boolean check = false;
-        for (int i=0;i<coin.size();i++) {
+    private static void interpret(ArrayList<Integer> number) {
+        boolean check = false;
+
+        HashSet<Integer> set=new HashSet<Integer>();
+    coin.clear();
+        for (int i=0;i<number.size();i++) {
             for(int j=2;j<=10;j++)
             {  String pass = (number.get(i)).toString();
-                System.out.println("Output for "+pass+" with radix "+j+" is"+Integer.parseInt(pass,j));
-               if(prime(Integer.parseInt(pass,j))==false)
-               {
+                System.out.println("Output for "+pass+" with radix "+j+" is "+Integer.parseInt(pass,j));
+               if(prime(Integer.parseInt(pass,j))==true)
+               {    //coin.add(i,number.get(i));
                    primenumber.add(Integer.parseInt(pass,j));
 
-               }
 
+               }
+                if(primenumber.isEmpty()) set.add(number.get(i));
             }
             System.out.println(primenumber);
+    primenumber.clear();
             System.out.println("*******************************************");
 
         }
-
+        coin.addAll(set);
+        System.out.println("The Required strings with no prime numbers with radix from 2 to 10 are "+coin);
     }
     private static boolean prime(int n)
     {
